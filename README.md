@@ -30,7 +30,7 @@ gh repo clone FireSpirit15/TEMPLATE_Java18-DiscordBot
   `TextChannel logs = e.getGuild().getTextChannelById("INSERT CHANNEL ID HERE");`\
   with own values
 
-- Step 5: Replace in Play.java\
+- Step 5: Replace in CommandPlay.java\
   `final VoiceChannel vc = (VoiceChannel) e.getGuild().getVoiceChannelById("INSERT VOICE CHANNEL ID HERE");`\
   with own values
 
