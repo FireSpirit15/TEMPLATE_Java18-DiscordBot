@@ -21,17 +21,17 @@ gh repo clone FireSpirit15/TEMPLATE_Java18-DiscordBot
 - Step 2: Open project in your working environment
 
 - Step 3: Replace in Main.java\
-  `JDA jda = JDABuilder.createLight("**INSERT BOT TOKEN HERE**", Collections.emptyList())`\
-  `Guild g = jda.getGuildById("**INSERT GUILD ID HERE**");`\
-  `TextChannel tc = g.getTextChannelById("**INSERT CHANNEL ID HERE**");`\
+  `JDA jda = JDABuilder.createLight("INSERT BOT TOKEN HERE", Collections.emptyList())`\
+  `Guild g = jda.getGuildById("INSERT GUILD ID HERE");`\
+  `TextChannel tc = g.getTextChannelById("INSERT CHANNEL ID HERE");`\
   with own values
 
 - Step 4: Replace in all command classes\
-  `TextChannel logs = e.getGuild().getTextChannelById("**INSERT CHANNEL ID HERE**");`\
+  `TextChannel logs = e.getGuild().getTextChannelById("INSERT CHANNEL ID HERE");`\
   with own values
 
 - Step 5: Replace in Play.java\
-  `final VoiceChannel vc = (VoiceChannel) e.getGuild().getVoiceChannelById("**INSERT VOICE CHANNEL ID HERE**");`\
+  `final VoiceChannel vc = (VoiceChannel) e.getGuild().getVoiceChannelById("INSERT VOICE CHANNEL ID HERE");`\
   with own values
 
 - Step 6: Run application and enjoy :D
