@@ -22,7 +22,7 @@ public class Restart extends ListenerAdapter {
 		
 		if (e.getName().equals("restart")) {
 			
-			TextChannel logs = e.getGuild().getTextChannelById("INSERT CHANNEL ID HERE");
+			TextChannel logs = e.getGuild().getTextChannelById(Main.channelID);
 			DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY - HH:mm:ss");
 			LocalDateTime now = LocalDateTime.now();
 			EmbedBuilder eb = new EmbedBuilder();

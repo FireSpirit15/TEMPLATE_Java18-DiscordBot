@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import de.firespirit.main.Main;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.EmbedType;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -20,7 +21,7 @@ public class Shutdown extends ListenerAdapter {
 		
 		if (e.getName().equals("shutdown")) {
 			
-			TextChannel logs = e.getGuild().getTextChannelById("INSERT CHANNEL ID HERE");
+			TextChannel logs = e.getGuild().getTextChannelById(Main.channelID);
 			DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY - HH:mm:ss");
 			LocalDateTime now = LocalDateTime.now();
 			EmbedBuilder eb = new EmbedBuilder();

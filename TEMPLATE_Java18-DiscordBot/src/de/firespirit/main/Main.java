@@ -35,11 +35,13 @@ public class Main {
 	public static String channelID = "INSERT LOG CHANNEL ID HERE";
 	public static String memberID = "INSERT BOT MEMBER ID HERE";
 	public static String voiceChannelID = "INSERT VOICE CHANNEL ID HERE";
+	public static String botToken = "INSERT BOT TOKEN HERE";
+	public static String guildID = "INSERT GUILD ID HERE";
 	
 	public static void main(String[] args) throws LoginException {
 		
         
-        JDA jda = JDABuilder.createLight("INSERT BOT TOKEN HERE", Collections.emptyList())
+        JDA jda = JDABuilder.createLight(botToken, Collections.emptyList())
         	.setActivity(Activity.playing("Moderation"))
             .setStatus(OnlineStatus.ONLINE)
             .enableIntents(GatewayIntent.GUILD_MEMBERS)
@@ -82,8 +84,8 @@ public class Main {
 			Thread.sleep(1000);
 			DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY - HH:mm:ss");
 			LocalDateTime now = LocalDateTime.now();
-			Guild g = jda.getGuildById("INSERT GUILD ID HERE");
-			TextChannel tc = g.getTextChannelById("INSERT CHANNEL ID HERE");
+			Guild g = jda.getGuildById(guildID);
+			TextChannel tc = g.getTextChannelById(channelID);
 			EmbedBuilder eb = new EmbedBuilder();
 			eb.setTitle("Bot online");
 			eb.setColor(Color.decode("#208013"));
