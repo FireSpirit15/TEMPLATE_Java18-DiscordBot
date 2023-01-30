@@ -1,8 +1,10 @@
 package de.firespirit.music;
 
 import java.awt.Color;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import de.firespirit.main.Main;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.EmbedType;
 import net.dv8tion.jda.api.entities.Member;
@@ -19,18 +21,19 @@ public class CommandStop extends ListenerAdapter {
 		
 		
 		if (e.getName().equals("stop")) {
-			DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YY - HH:mm");
+			DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY - HH:mm:ss");
+			LocalDateTime now = LocalDateTime.now();
             PlayerManager.getINSTANCE().getMusicManager(e.getGuild()).scheduler.audioPlayer.stopTrack();
             PlayerManager.getINSTANCE().getMusicManager(e.getGuild()).scheduler.queue.clear();
             e.getGuild().getAudioManager().closeAudioConnection();
 			
-			TextChannel logs = e.getGuild().getTextChannelById("INSERT CHANNEL ID HERE");
+			TextChannel logs = e.getGuild().getTextChannelById(Main.channelID);
 			Member m = e.getMember();
 
 			EmbedBuilder embed = new EmbedBuilder();
 			embed.setColor(Color.MAGENTA);
 			embed.setTitle(m.getEffectiveName() + " stopped the player!");
-			embed.setFooter(e.getTimeCreated().format(date));
+			embed.setFooter(date.format(now));
 			
 			logs.sendMessageEmbeds(embed.build()).queue();
 			embed.clear();

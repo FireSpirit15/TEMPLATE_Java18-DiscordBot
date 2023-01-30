@@ -1,8 +1,10 @@
 package de.firespirit.music;
 
 import java.awt.Color;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import de.firespirit.main.Main;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.EmbedType;
 import net.dv8tion.jda.api.entities.Member;
@@ -19,15 +21,16 @@ public class CommandPause extends ListenerAdapter {
 		
 		
 		if (e.getName().equals("pause")) {
-			DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YY - HH:mm");
-			TextChannel logs = e.getGuild().getTextChannelById("INSERT CHANNEL ID HERE");
+			DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY - HH:mm:ss");
+			LocalDateTime now = LocalDateTime.now();
+			TextChannel logs = e.getGuild().getTextChannelById(Main.channelID);
 			Member m = e.getMember();
 			if (PlayerManager.getINSTANCE().getMusicManager(e.getGuild()).scheduler.audioPlayer.isPaused()){
 	            PlayerManager.getINSTANCE().getMusicManager(e.getGuild()).scheduler.audioPlayer.setPaused(false);
 	            EmbedBuilder embed = new EmbedBuilder();
 				embed.setColor(Color.MAGENTA);
 				embed.setTitle(m.getEffectiveName() + " resumed the current track!");
-				embed.setFooter(e.getTimeCreated().format(date));
+				embed.setFooter(date.format(now));
 				
 				logs.sendMessageEmbeds(embed.build()).queue();
 				embed.clear();
@@ -36,7 +39,7 @@ public class CommandPause extends ListenerAdapter {
 	            EmbedBuilder embed = new EmbedBuilder();
 				embed.setColor(Color.MAGENTA);
 				embed.setTitle(m.getEffectiveName() + " paused current track!");
-				embed.setFooter(e.getTimeCreated().format(date));
+				embed.setFooter(date.format(now));
 				
 				logs.sendMessageEmbeds(embed.build()).queue();
 				embed.clear();

@@ -32,6 +32,9 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 public class Main {
 	
 	public static int errorCount;
+	public static String channelID = "INSERT LOG CHANNEL ID HERE";
+	public static String memberID = "INSERT BOT MEMBER ID HERE";
+	public static String voiceChannelID = "INSERT VOICE CHANNEL ID HERE";
 	
 	public static void main(String[] args) throws LoginException {
 		

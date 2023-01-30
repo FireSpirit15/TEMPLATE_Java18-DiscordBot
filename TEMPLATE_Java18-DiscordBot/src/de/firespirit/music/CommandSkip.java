@@ -1,10 +1,12 @@
 package de.firespirit.music;
 
 import java.awt.Color;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 
+import de.firespirit.main.Main;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.EmbedType;
 import net.dv8tion.jda.api.entities.Member;
@@ -21,16 +23,17 @@ public class CommandSkip extends ListenerAdapter {
 		
 		
 		if (e.getName().equals("skip")) {
-			DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YY - HH:mm");
+			DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY - HH:mm:ss");
+			LocalDateTime now = LocalDateTime.now();
 			final GuildMusicManager musicManager = PlayerManager.getINSTANCE().getMusicManager(e.getGuild());
 	        final AudioPlayer audioPlayer = musicManager.audioPlayer;
-	        TextChannel logs = e.getGuild().getTextChannelById("INSERT CHANNEL ID HERE");
+	        TextChannel logs = e.getGuild().getTextChannelById(Main.channelID);
 
 	        if(audioPlayer.getPlayingTrack() == null){
 	        	EmbedBuilder embed = new EmbedBuilder();
 				embed.setColor(Color.MAGENTA);
 				embed.setTitle("There is no track queued!");
-				embed.setFooter(e.getTimeCreated().format(date));
+				embed.setFooter(date.format(now));
 				
 				logs.sendMessageEmbeds(embed.build()).queue();
 				embed.clear();
@@ -47,7 +50,7 @@ public class CommandSkip extends ListenerAdapter {
 			embed.setDescription("Now playing"
 					+ "\nName » " + musicManager.audioPlayer.getPlayingTrack().getInfo().title
 					+ "\nAuthor » " + musicManager.audioPlayer.getPlayingTrack().getInfo().author);
-			embed.setFooter(e.getTimeCreated().format(date));
+			embed.setFooter(date.format(now));
 			
 			logs.sendMessageEmbeds(embed.build()).queue();
 			embed.clear();

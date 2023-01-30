@@ -1,8 +1,10 @@
 package de.firespirit.music;
 
 import java.awt.Color;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import de.firespirit.main.Main;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.EmbedType;
 import net.dv8tion.jda.api.entities.Member;
@@ -18,17 +20,18 @@ public class CommandVolume extends ListenerAdapter {
 	@Override
 	public void onSlashCommandInteraction(SlashCommandInteractionEvent e) {
 		
-		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YY - HH:mm");
-		TextChannel logs = e.getGuild().getTextChannelById("INSERT CHANNEL ID HERE");
+		TextChannel logs = e.getGuild().getTextChannelById(Main.channelID);
 		
 		if (e.getName().equals("volume")) {
 			Member m = e.getMember();
+			DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY - HH:mm:ss");
+			LocalDateTime now = LocalDateTime.now();
 			OptionMapping optionvolume = e.getOption("volume");
 			 PlayerManager.getINSTANCE().getMusicManager(e.getGuild()).scheduler.audioPlayer.setVolume(optionvolume.getAsInt());
 	            EmbedBuilder embed = new EmbedBuilder();
 				embed.setColor(Color.YELLOW);
-				embed.setTitle(m.getEffectiveName() + " set volume to " + optionvolume + " !");
-				embed.setFooter(e.getTimeCreated().format(date));
+				embed.setTitle(m.getEffectiveName() + " set volume to " + optionvolume.getAsString() + " !");
+				embed.setFooter(date.format(now));
 				
 				logs.sendMessageEmbeds(embed.build()).queue();
 				embed.clear();

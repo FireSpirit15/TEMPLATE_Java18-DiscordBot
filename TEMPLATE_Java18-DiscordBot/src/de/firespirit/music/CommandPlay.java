@@ -3,6 +3,8 @@ package de.firespirit.music;
 import java.awt.Color;
 import java.net.URI;
 import java.time.format.DateTimeFormatter;
+
+import de.firespirit.main.Main;
 import net.dv8tion.jda.api.entities.EmbedType;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -33,12 +35,12 @@ public class CommandPlay extends ListenerAdapter {
 		
 		if (e.getName().equals("play")) {
 			Guild g = e.getGuild();
-			Member bot = g.getMemberById("INSERT BOT MEMBER ID HERE");
+			Member bot = g.getMemberById(Main.memberID);
 			if (!bot.getVoiceState().inAudioChannel()) {
 				final AudioManager audioManager = e.getGuild().getAudioManager();
-				final VoiceChannel vc = (VoiceChannel) e.getGuild().getVoiceChannelById("INSERT VOICE CHANNEL ID HERE");
+				final VoiceChannel vc = (VoiceChannel) e.getGuild().getVoiceChannelById(Main.voiceChannelID);
 				audioManager.openAudioConnection(vc);
-//				PlayerManager.getINSTANCE().getMusicManager(e.getGuild()).scheduler.audioPlayer.setVolume(10);
+				PlayerManager.getINSTANCE().getMusicManager(e.getGuild()).scheduler.audioPlayer.setVolume(10);
 			}
 				
 				OptionMapping optionlink = e.getOption("link");

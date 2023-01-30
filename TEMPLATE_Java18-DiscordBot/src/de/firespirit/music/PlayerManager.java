@@ -1,6 +1,7 @@
 package de.firespirit.music;
 
 import java.awt.Color;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +51,8 @@ public class PlayerManager {
 			
 			@Override
 			public void trackLoaded(AudioTrack track) {
+				DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY - HH:mm:ss");
+				LocalDateTime now = LocalDateTime.now();
 				musicManager.scheduler.queue(track);
 				
 				EmbedBuilder embed = new EmbedBuilder();
@@ -57,7 +60,7 @@ public class PlayerManager {
 				embed.setTitle(m.getEffectiveName() + " queued a new track!");
 				embed.setDescription("Name » " + musicManager.audioPlayer.getPlayingTrack().getInfo().title
 						+ "\nAuthor » " + musicManager.audioPlayer.getPlayingTrack().getInfo().author);
-				embed.setFooter(e.getTimeCreated().format(date));
+				embed.setFooter(date.format(now));
 				
 				tc.sendMessageEmbeds(embed.build()).queue();
 				embed.clear();
@@ -65,6 +68,8 @@ public class PlayerManager {
 			
 			@Override
 			public void playlistLoaded(AudioPlaylist playlist) {
+				DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY - HH:mm:ss");
+				LocalDateTime now = LocalDateTime.now();
 				final List<AudioTrack> tracks = playlist.getTracks();
 				if (!tracks.isEmpty()) {
 					musicManager.scheduler.queue(tracks.get(counter));
@@ -74,7 +79,7 @@ public class PlayerManager {
 					embed.setTitle(m.getEffectiveName() + " queued a new track!");
 					embed.setDescription("Name » " + tracks.get(counter).getInfo().title
 							+ "\nAuthor » " + tracks.get(counter).getInfo().author);
-					embed.setFooter(e.getTimeCreated().format(date));
+					embed.setFooter(date.format(now));
 					
 					tc.sendMessageEmbeds(embed.build()).queue();
 					embed.clear();
@@ -85,10 +90,12 @@ public class PlayerManager {
 			
 			@Override
 			public void noMatches() {
+				DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY - HH:mm:ss");
+				LocalDateTime now = LocalDateTime.now();
 				EmbedBuilder embed = new EmbedBuilder();
 				embed.setColor(Color.RED);
 				embed.setTitle("No matches found!");
-				embed.setFooter(e.getTimeCreated().format(date));
+				embed.setFooter(date.format(now));
 				
 				tc.sendMessageEmbeds(embed.build()).queue();
 				embed.clear();
@@ -96,10 +103,12 @@ public class PlayerManager {
 			
 			@Override
 			public void loadFailed(FriendlyException exception) {
+				DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY - HH:mm:ss");
+				LocalDateTime now = LocalDateTime.now();
 				EmbedBuilder embed = new EmbedBuilder();
 				embed.setColor(Color.RED);
 				embed.setTitle("Error loading specified track!");
-				embed.setFooter(e.getTimeCreated().format(date));
+				embed.setFooter(date.format(now));
 				
 				tc.sendMessageEmbeds(embed.build()).queue();
 				embed.clear();
