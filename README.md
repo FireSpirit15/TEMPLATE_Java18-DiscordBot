@@ -26,7 +26,6 @@ gh repo clone FireSpirit15/TEMPLATE_Java18-DiscordBot
   `"INSERT VOICE CHANNEL ID HERE"`\
   `"INSERT BOT TOKEN HERE"`\
   `"INSERT GUILD ID HERE"`\
-  `"INSERT CHANNEL ID HERE"`\
   with own values
 
 - Step 4: Run application and enjoy :D
